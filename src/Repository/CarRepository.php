@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Car;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Car>
@@ -37,6 +38,11 @@ class CarRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function findAllWithPaginator(): Query
+    {
+      return $this->createQueryBuilder('v')->getQuery();
     }
 
 //    /**
