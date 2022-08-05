@@ -4,6 +4,21 @@
 {% block header %}Cars list{% endblock %}
 {% block body %}
 
+{{form_start(form) }}
+  <div class="row no-gutters rounded text-center align-items-center text-white m-5 bg-primary p-2">
+    <div class="col">
+        {{ form_row(form.minYear) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.maxYear) }}
+    </div>
+
+    <div class="col-2">
+      <input type="submit" value="Search" class="btn btn-warning" >
+    </div>
+  </div>
+{{ form_end(form) }}
+
   <div class="cars-container">
 
       {% for car in cars %}

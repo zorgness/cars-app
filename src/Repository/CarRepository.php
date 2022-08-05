@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Car;
 use Doctrine\ORM\Query;
+use App\Entity\SearchCar;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -40,9 +41,20 @@ class CarRepository extends ServiceEntityRepository
         }
     }
 
-    public function findAllWithPaginator(): Query
+    public function findAllWithPaginator(SearchCar $searchCar): Query
     {
-      return $this->createQueryBuilder('v')->getQuery();
+      $req = $this->createQueryBuilder('v');
+      if($searchCar->getMinYear())
+      {
+        $req = $req->andWhere('v.year >= :min')
+              ->setParameter('min', $searchCar->getMinYear());
+      }
+      if($searchCar->getMaxYear())
+      {
+        $req = $req->andWhere('v.year <= :max')
+              ->setParameter('max', $searchCar->getMaxYear());
+      }
+      return $req->getQuery();
     }
 
 //    /**
