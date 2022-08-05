@@ -1,6 +1,10 @@
-@import "custom";
-@import "~bootstrap/scss/bootstrap";
+// @import "custom";
+// @import "~bootstrap/scss/bootstrap";
 
-body {
-    background-color: white;
-}
+@import 'components/navbar';
+@import 'components/avatar';
+@import 'cars/index';
+
+// body {
+//     background-color: white;
+// }
