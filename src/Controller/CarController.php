@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\SearchCar;
+use App\Form\SearchCarType;
 use App\Repository\CarRepository;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,8 +17,13 @@ class CarController extends AbstractController
     public function index(CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
 
+
+        $searchCars = new SearchCar();
+        $form = $this->createForm(SearchCarType::class, $searchCars);
+        $form->handleRequest($request);
+
         $cars = $paginator->paginate(
-          $repository->findAllWithPaginator(),
+          $repository->findAllWithPaginator($searchCars),
           $request->query->getInt('page', 1), /*page number*/
           6 /*limit per page*/
       );
@@ -25,6 +32,8 @@ class CarController extends AbstractController
         return $this->render('car/index.html.twig', [
             'controller_name' => 'CarController',
             'cars' => $cars,
+            'form' => $form->createView()
+
         ]);
     }
 }
