@@ -18,8 +18,6 @@ class Model
     #[ORM\Column(length: 255)]
     private ?string $label = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $i = null;
 
     #[ORM\Column]
     private ?int $averagePrice = null;
@@ -55,17 +53,6 @@ class Model
         return $this;
     }
 
-    public function getI(): ?string
-    {
-        return $this->i;
-    }
-
-    public function setI(?string $i): self
-    {
-        $this->i = $i;
-
-        return $this;
-    }
 
     public function getAveragePrice(): ?int
     {

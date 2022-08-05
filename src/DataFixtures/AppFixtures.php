@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\Car;
 use App\Entity\Brand;
 use App\Entity\Model;
 use Doctrine\Persistence\ObjectManager;
@@ -38,7 +39,7 @@ class AppFixtures extends Fixture
             ->setImage('modele2.jpg')
             ->setAveragePrice(13000)
             ->setBrand($b2);
-        $manager->persist($b2);
+        $manager->persist($m2);
 
         $m3 = new Model();
         $m3->setLabel('montecarlo')
@@ -68,6 +69,26 @@ class AppFixtures extends Fixture
             ->setBrand($b2);
         $manager->persist($m6);
 
+        $modeles = [$m1, $m2, $m3, $m4, $m5, $m6];
+
+        $regex = "[A-Z]{2}[0-9]{4}[A-Z]{2}";
+
+        $faker = \Faker\Factory::create();
+
+        foreach ($modeles as $model) {
+          $rand = rand(3, 5);
+          for($i = 1; $i <= $rand; $i++) {
+
+            $car = new Car();
+            $car->setRegistration($faker->randomLetter() . $faker->randomLetter() . "-" . $faker->numberBetween($min = 1000, $max = 9000) . "-" . $faker->randomLetter() . $faker->randomLetter())
+                ->setNumberDoors($faker->randomElement($array = array(2,4)))
+                ->setYear($faker->numberBetween($min = 1910, $max = 1970))
+                ->setModel($model);
+            $manager->persist($car);
+          }
+      }
+
         $manager->flush();
-    }
+}
+
 }
