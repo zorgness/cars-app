@@ -80,7 +80,7 @@ class AppFixtures extends Fixture
           for($i = 1; $i <= $rand; $i++) {
 
             $car = new Car();
-            $car->setRegistration($faker->randomLetter() . $faker->randomLetter() . "-" . $faker->numberBetween($min = 1000, $max = 9000) . "-" . $faker->randomLetter() . $faker->randomLetter())
+            $car->setRegistration($faker->randomLetter() . $faker->randomLetter() . $faker->numberBetween($min = 1000, $max = 9000)  . $faker->randomLetter() . $faker->randomLetter())
                 ->setNumberDoors($faker->randomElement($array = array(2,4)))
                 ->setYear($faker->numberBetween($min = 1910, $max = 1970))
                 ->setModel($model);
