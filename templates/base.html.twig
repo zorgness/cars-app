@@ -26,8 +26,16 @@
 
 
          {% if block('header')%}
-            <h1 class="m-3 p-2 border border-dark rounded bg-warning">{% block header %}{% endblock %}</h1>
+            <div class="m-3 p-2 border border-dark rounded bg-warning d-flex align-items-center" >
+                    <h1 class="">{% block header %}{% endblock %}</h1>
+                    {% if app.user %}
+                      <h5 class="mx-5">{% block user %}Welcome {{ is_granted('ROLE_ADMIN') ? 'Admin ' : ''}} {{ app.user.username|title}}!!!{% endblock %}</h5>
+                    {% endif %}
+             </div>
+
           {% endif %}
+
+
         {% block body %}{% endblock %}
     </body>
 </html>
