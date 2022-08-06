@@ -4,7 +4,18 @@
 @import 'components/navbar';
 @import 'components/avatar';
 @import 'cars/index';
+@import 'cars/home';
 
 // body {
 //     background-color: white;
 // }
+
+body {
+
+    background-attachment: fixed; /* Fixe l'image pendant le scroll */
+    background-size: cover; /* L'image prendra 100% de l'espace, quitte à la crop */
+    background-position: center; /* Centre la position de l'image */
+    background-repeat: no-repeat; /* Empêche l'image de se répéter en fonction de la taille d'écran */
+    background-image: url("https://media.istockphoto.com/vectors/061old-cars-set-3-vector-id1307706620?k=20&m=1307706620&s=612x612&w=0&h=FrnpBOcXu5QciPGdnc4kmD6iN3IM3awecbZGAOXAaa4=");
+
+}
