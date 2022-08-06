@@ -4,6 +4,13 @@
 {% block header %}Cars list{% endblock %}
 {% block body %}
 
+{% if admin %}
+    <div class="d-flex flex-row-reverse">
+      <a href="{{ path('admin_car_new') }}" class="btn btn-success mx-5 align-right">Add car</a>
+    </div>
+{% endif %}
+
+
 {{form_start(form) }}
   <div class="row no-gutters rounded text-center align-items-center text-white m-5 bg-primary p-2">
     <div class="col">
@@ -23,7 +30,7 @@
 
       {% for car in cars %}
 
-        <div class="card" style="width: 18rem;">
+        <div class="card bg-info disabled text-white" style="width: 18rem;">
           <img src="{{ asset('images/car/' ~ car.model.image )}}" class="card-img-top" alt="...">
           <div class="card-body">
             <h5 class="card-title">{{ car.registration|upper  }}</h5>
@@ -32,6 +39,18 @@
             <p class="card-text">doors:  <strong class="mx-5">{{car.numberDoors}}</strong></p>
             <p class="card-text">year:   <strong class="mx-5">{{car.year}}</strong></p>
             <p class="card-text">average price:   <strong class="mx-5">{{car.model.averagePrice}} $</strong></p>
+            {% if admin %}
+              <div class="btn-group d-flex justify-content-center">
+
+                <a href="{{ path('admin_car_edit', {'id':car.id}) }}" class="btn btn-outline-warning">Modify</a>
+
+                <form method="POST" style="display: inline-block"  action="{{ path('car_destroy', {'id':car.id}) }}" onsubmit="return confirm('Are you sure you want to delete this car?')">
+                  <input type="hidden" name="_method" value="SUP">
+                  <input type="hidden" name="_token" value="{{csrf_token('SUP' ~ car.id)}}">
+                  <input type="submit" value="Delete" class="btn btn-outline-danger">
+                </form>
+              </div>
+            {% endif %}
           </div>
         </div>
 
