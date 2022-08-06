@@ -13,7 +13,16 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class CarController extends AbstractController
 {
-    #[Route('/', name: 'cars')]
+
+    #[Route('/', name: 'home')]
+    public function home()
+    {
+      return $this->render('car/home.html.twig', [
+        'controller_name' => 'CarController'
+      ]);
+    }
+
+    #[Route('/cars', name: 'cars')]
     public function index(CarRepository $repository, PaginatorInterface $paginator, Request $request): Response
     {
 
