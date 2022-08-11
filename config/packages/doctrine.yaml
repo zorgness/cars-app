@@ -22,6 +22,7 @@ when@test:
             # "TEST_TOKEN" is typically set by ParaTest
             dbname_suffix: '_test%env(default::TEST_TOKEN)%'
             driver: 'pdo_mysql'
+            server_version: '5.5'
 
 when@prod:
     doctrine:
