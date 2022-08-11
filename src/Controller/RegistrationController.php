@@ -32,7 +32,7 @@ class RegistrationController extends AbstractController
         $entityManager->persist($user);
         $entityManager->flush();
         $this->addFlash("success", 'user have been registred');
-        return $this->redirectToRoute('cars');
+        return $this->redirectToRoute('home');
       }
         return $this->render('registration/new.html.twig', [
             'controller_name' => 'RegistrationController',
