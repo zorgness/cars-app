@@ -3,8 +3,10 @@
 namespace App\DataFixtures;
 
 use App\Entity\Car;
+use App\Entity\User;
 use App\Entity\Brand;
 use App\Entity\Model;
+use App\Entity\Account;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -14,6 +16,20 @@ class AppFixtures extends Fixture
     {
         // $product = new Product();
         // $manager->persist($product);
+
+        $u1 = new Account();
+        $u1->setUsername('toto')
+          ->setRoles(["ROLE_ADMIN"])
+          ->setPassword('123456')
+          ->setVerificationPassword('123456');
+          $manager->persist($u1);
+
+        $u2 = new Account();
+        $u2->setUsername('denis')
+          ->setRoles([""])
+          ->setPassword('123456')
+          ->setVerificationPassword('123456');
+          $manager->persist($u2);
 
         $b1 = new Brand();
         $b1->setLabel('citro');

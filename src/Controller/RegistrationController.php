@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Entity\User;
+use App\Entity\Account;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,7 +18,7 @@ class RegistrationController extends AbstractController
     public function new( Request $request, EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordHasher): Response
     {
 
-      $user = new User();
+      $user = new Account();
       $form = $this->createForm(RegistrationType::class,$user);
 
       $form->handleRequest($request);
